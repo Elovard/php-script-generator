@@ -18,8 +18,6 @@ if ($total_count == 1) {
 
     $faker = Faker\Factory::create();
     $counter = 0;
-    $counter_two = 2;
-    $counter_three = 2;
     $parent_id = 0;
 
     while($counter != 99) {
@@ -42,33 +40,37 @@ if ($total_count == 1) {
         $query->execute([$firstname, $lastname, $email, $shares_amount, date('Y-m-d h:s', $start_date)]);
     }
 
-    while ($counter_two <= 100) {
+    $counter = 2;
+
+    while ($counter <= 100) {
         $random_affiliate = generateRandomAffiliate();
 
-        $query_edit = ("UPDATE participants SET parent_id=$random_affiliate WHERE entity_id=$counter_two");
+        $query_edit = ("UPDATE participants SET parent_id=$random_affiliate WHERE entity_id=$counter");
         $edit = $pdo->prepare($query_edit);
         $edit->execute();
 
-        $counter_two++;
+        $counter++;
     }
 
-    while ($counter_three <= 100) {
-        $query_shares = $pdo->prepare("SELECT SUM(shares_amount) FROM participants WHERE parent_id=$counter_three");
+    $counter = 2;
+
+    while ($counter <= 100) {
+        $query_shares = $pdo->prepare("SELECT SUM(shares_amount) FROM participants WHERE parent_id=$counter");
         $query_shares->execute();
         $total_shares = $query_shares->fetchColumn();
 
         if ($total_shares >= 1000) {
-            $query_position = $pdo->prepare("UPDATE participants SET position='manager' WHERE entity_id=$counter_three");
+            $query_position = $pdo->prepare("UPDATE participants SET position='manager' WHERE entity_id=$counter");
             $query_position->execute();
         } else {
-            $query_position = $pdo->prepare("UPDATE participants SET position='novice' WHERE entity_id=$counter_three");
+            $query_position = $pdo->prepare("UPDATE participants SET position='novice' WHERE entity_id=$counter");
             $query_position->execute();
         }
 
-        $counter_three++;
+        $counter++;
     }
 
-    $query_max_shares = $pdo->prepare("SELECT MAX(shares_amount) FROM participants WHERE entity_id>1");
+    $query_max_shares = $pdo->prepare("SELECT MAX(shares_amount) FROM participants WHERE entity_id>2");
     $query_max_shares->execute();
     $max_shares = $query_max_shares->fetchColumn();
 
