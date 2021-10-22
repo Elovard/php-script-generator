@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '7b408c2d71e0a2dea9e4943613d19afad6546bb6',
         'name' => 'elovard/script-generator',
         'dev' => true,
     ),
     'versions' => array(
         'elovard/script-generator' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '7b408c2d71e0a2dea9e4943613d19afad6546bb6',
             'dev_requirement' => false,
         ),
         'fakerphp/faker' => array(
