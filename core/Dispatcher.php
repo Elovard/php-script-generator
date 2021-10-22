@@ -5,7 +5,7 @@
 
 		public function getPage(Track $track) {
 			$className = ucfirst($track->controller) . 'Controller';
-			$fullName = "\\Project\\Controllers\\$className";
+			$fullName = "\\project\\controllers\\$className";
 			
 			try {
 				$controller = new $fullName;
