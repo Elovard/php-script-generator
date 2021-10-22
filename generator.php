@@ -1,14 +1,14 @@
 <?php
 
-function generateShares(): int {
+function generateShares() {
     return rand(1, 500);
 }
 
-function generateDate(): int {
+function generateDate() {
     return rand(1273449600, 1633693070);
 }
 
-function generateRandomAffiliate(): int {
+function generateRandomAffiliate() {
     return rand(0, 99);
 }
 
