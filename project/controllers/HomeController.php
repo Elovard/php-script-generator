@@ -2,7 +2,7 @@
 	namespace Project\Controllers;
 	use \Core\Controller;
 
-	class HelloController extends Controller {
+	class HomeController extends Controller {
 
 		public function index() {
 			$this->title = 'All done!';
