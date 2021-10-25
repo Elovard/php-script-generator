@@ -2,17 +2,22 @@
 
 namespace Project\Controllers;
 
+use Core\AffiliateModel;
 use Core\Controller;
+use Core\ParticipantModel;
 use Faker\Factory;
-use Project\Models\ParticipantDb;
+use Project\Models\DbService;
 
 class ScriptController extends Controller {
 
     public function start() {
         $this->title = 'script';
         echo 'Starting script...' . '<br>';
-        $db = new ParticipantDb();
-        $total_participants_count = $db->getTotalParticipantsCount();
+
+        $participant_db = new ParticipantModel();
+        $affiliates_db = new AffiliateModel();
+
+        $total_participants_count = $participant_db->getTotalParticipantsCount();
 
         echo "Checking the amount of participants... Found: $total_participants_count participant(s).<br>";
 
@@ -31,9 +36,8 @@ class ScriptController extends Controller {
 
                 $counter++;
 
-                $db->insertIntoRandomAffiliates($firstname, $start_date);
-
-                $db->insertIntoRandomParticipants($firstname, $lastname, $email, $shares_amount, $start_date);
+                $affiliates_db->insertRandomAffiliate($firstname, $start_date);
+                $participant_db->insertRandomParticipant($firstname, $lastname, $email, $shares_amount, $start_date);
 
             }
 
@@ -41,7 +45,7 @@ class ScriptController extends Controller {
 
             while ($counter <= 100) {
                 $random_affiliate = generateRandomAffiliate();
-                $db->insertRandomParentToParticipant($random_affiliate, $counter);
+                $participant_db->setRandomParentToParticipant($counter, $random_affiliate);
 
                 $counter++;
             }
@@ -49,19 +53,19 @@ class ScriptController extends Controller {
             $counter = 2;
 
             while ($counter <= 100) {
-                $total_shares = $db->calculateTotalShares($counter);
+                $total_shares = $participant_db->calculateTotalShares($counter);
 
                 if ($total_shares >= 1000) {
-                    $db->setManagerPositionToParticipant($counter);
+                    $participant_db->setParticipantPositionToManager($counter);
                 } else {
-                    $db->setNovicePositionToParticipant($counter);
+                    $participant_db->setParticipantPositionToNovice($counter);
                 }
 
                 $counter++;
             }
 
-            $max_shares = $db->getMaxSharesAmountFromParticipants();
-            $db->setVicePresidentPositionToParticipant($max_shares);
+            $max_shares = $participant_db->findMaxSharesAmountFromParticipants();
+            $participant_db->setParticipantPositionToVicePresident($max_shares);
 
             echo 'Generation completed!' . '<br>';
 
@@ -69,9 +73,13 @@ class ScriptController extends Controller {
             echo "Database is not empty!" . '<br>';
             echo "Deleting participants..." . '<br>';
 
-            $db->clearDatabase();
+            $participant_db->wipeRecordsFromParticipants();
+            $affiliates_db->wipeRecordsFromAffiliates();
 
-            echo 'Deletion complete!';
+            $affiliates_db->refreshAutoIncrementInAffiliates();
+            $participant_db->refreshAutoIncrementInParticipants();
+
+            echo 'Deletion completed!';
         }
 
         return $this->render('script/script');

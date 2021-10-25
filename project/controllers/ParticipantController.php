@@ -3,7 +3,8 @@
 namespace Project\Controllers;
 
 use Core\Controller;
-use Project\Models\ParticipantDb;
+use Core\ParticipantModel;
+use Project\Models\DbService;
 
 define('PARTICIPANT_ID_ARRAY', 0);
 define('PARTICIPANT_FIRSTNAME_ARRAY', 1);
@@ -11,9 +12,9 @@ define('PARTICIPANT_LASTNAME_ARRAY', 2);
 
 class ParticipantController extends Controller {
 
-    public function getOneParticipant($params) {
+    public function getOneParticipant($params): \Core\Page {
         $this->title = 'one';
-        $db = new ParticipantDb();
+        $db = new ParticipantModel();
         $participant = $db->getParticipantById($params['id']);
 
         echo "Participant with id " . $params['id'] . ':' . '<br>';
@@ -21,9 +22,9 @@ class ParticipantController extends Controller {
         return $this->render('test/show');
     }
 
-    public function getAllParticipants() {
+    public function getAllParticipants(): \Core\Page {
         $this->title = 'all';
-        $db = new ParticipantDb();
+        $db = new ParticipantModel();
         $participants = $db->getAllParticipants();
 
         echo 'All participants: <br>';
