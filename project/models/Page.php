@@ -1,8 +1,8 @@
 <?php
 	namespace Project\Models;
-	use \Core\Model;
+	use \Core\ParticipantModel;
 	
-	class Page extends Model {
+	class Page extends ParticipantModel {
 
 		public function getById($id) {
 			return $this->findOne("SELECT * FROM participants WHERE entity_id=$id");

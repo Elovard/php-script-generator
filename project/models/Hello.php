@@ -1,7 +1,7 @@
 <?php
 	namespace Project\Models;
-	use \Core\Model;
+	use \Core\ParticipantModel;
 	
-	class Hello extends Model {
+	class Hello extends ParticipantModel {
 		
 	}
