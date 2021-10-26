@@ -10,6 +10,8 @@ use Project\Models\DbService;
 
 class ScriptController extends Controller {
 
+    protected $title;
+
     public function start() {
         $this->title = 'script';
         echo 'Starting script...' . '<br>';

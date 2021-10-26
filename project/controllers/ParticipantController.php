@@ -12,6 +12,8 @@ define('PARTICIPANT_LASTNAME_ARRAY', 2);
 
 class ParticipantController extends Controller {
 
+    protected $title;
+
     public function getOneParticipant($params): \Core\Page {
         $this->title = 'one';
         $db = new ParticipantModel();
