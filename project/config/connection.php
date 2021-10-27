@@ -1,8 +1,8 @@
 <?php
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'participants');
-define('DB_USER', 'root');
+const DB_HOST = 'localhost';
+const DB_NAME = 'participants';
+const DB_USER = 'root';
 define('DB_PASSWORD', getenv('MYSQL_ROOT_PASSWORD'));
-define('DB_TABLE_VERSIONS', 'versions');
+const DB_TABLE_VERSIONS = 'versions';
 
