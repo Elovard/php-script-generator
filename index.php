@@ -3,6 +3,7 @@
 
     include ('project/utils/generator.php');
     include('vendor/autoload.php');
+    include ('migrations/migration.php');
 
     error_reporting(E_ALL);
     ini_set('display_errors', 'on');
