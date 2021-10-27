@@ -7,7 +7,7 @@
     class AffiliateModel extends CustomOrm {
 
         public function wipeRecordsFromAffiliates() {
-            parent::deleteRecord(AFFILIATES_DB, 'id', '!=', 0);
+            parent::deleteRecord(AFFILIATES_DB, 'id', '!=', 1);
         }
 
         public function refreshAutoIncrementInAffiliates() {

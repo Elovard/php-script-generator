@@ -9,7 +9,7 @@ function generateDate() {
 }
 
 function generateRandomAffiliate() {
-    return rand(0, 99);
+    return rand(1, 99);
 }
 
 

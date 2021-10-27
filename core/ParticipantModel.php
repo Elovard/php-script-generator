@@ -1,7 +1,9 @@
 <?php
 	namespace Core;
 
-    define('PARTICIPANTS_DB', 'participants');
+    const PARTICIPANTS_DB = 'participants';
+    const CALCULATE_SHARES_FROM_SECOND_PARTICIPANT = 2;
+    const ONE_EMBEDDED_PARTICIPANT = 1;
 
     class ParticipantModel extends CustomOrm {
 
@@ -30,11 +32,12 @@
         }
 
         public function findMaxSharesAmountFromParticipants() {
-            return parent::selectMaxColumnValue(PARTICIPANTS_DB, 'shares_amount', 'entity_id', 2);
+            return parent::selectMaxColumnValue(PARTICIPANTS_DB,
+                'shares_amount', 'entity_id', CALCULATE_SHARES_FROM_SECOND_PARTICIPANT);
         }
 
         public function wipeRecordsFromParticipants() {
-            parent::deleteRecord(PARTICIPANTS_DB, 'entity_id', '!=', 1);
+            parent::deleteRecord(PARTICIPANTS_DB, 'entity_id', '!=', ONE_EMBEDDED_PARTICIPANT);
         }
 
         public function refreshAutoIncrementInParticipants() {
