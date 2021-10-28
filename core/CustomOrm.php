@@ -2,6 +2,7 @@
 
 namespace Core;
 use \PDO;
+include ('project/config/connection.php');
 
 class CustomOrm {
 

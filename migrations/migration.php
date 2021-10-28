@@ -1,15 +1,20 @@
 <?php
 
-function connectDb(): ?PDO {
-    $conn = null;
-    try {
-        $conn = new PDO("mysql:host=" . 'localhost' ."; dbname=" . 'participants' , 'root', getenv('MYSQL_ROOT_PASSWORD'));
-    } catch (PDOException $ex) {
-        echo 'Cannot connect to DB: ' . $ex->getMessage();
-    }
-    return $conn;
-}
-$conn = connectDb();
+//function connectDb(): ?PDO {
+//    $conn = null;
+//    try {
+//        $conn = new PDO("mysql:host=" . 'localhost' ."; dbname=" . 'participants' , 'root', getenv('MYSQL_ROOT_PASSWORD'));
+//    } catch (PDOException $ex) {
+//        echo 'Cannot connect to DB: ' . $ex->getMessage();
+//    }
+//    return $conn;
+//}
+
+include ('core/CustomOrm.php');
+use \Core\CustomOrm;
+
+$orm = new CustomOrm();
+$conn = $orm::getPdo();
 $files = getMigrationFiles($conn);
 
 function getMigrationFiles($conn) {
