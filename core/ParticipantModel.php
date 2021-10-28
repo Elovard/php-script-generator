@@ -48,6 +48,10 @@
             parent::updateColumn(PARTICIPANTS_DB, 'parent_id', $affiliate_id, 'entity_id', $participant_id);
         }
 
+        public function setNotifications($participant_id, $bool_value) {
+            parent::updateColumn(PARTICIPANTS_DB, 'notifications_enabled', $bool_value, 'entity_id', $participant_id);
+        }
+
         public function insertRandomParticipant($firstname, $lastname, $email, $shares_amount, $start_date) {
             $insertion = ("INSERT INTO participants (firstname, lastname, email, shares_amount, start_date)
                 VALUES (?, ?, ?, ?, ?)");

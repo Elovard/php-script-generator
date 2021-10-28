@@ -12,4 +12,8 @@ function generateRandomAffiliate() {
     return rand(1, 99);
 }
 
+function isNotificationsEnabled() {
+    return rand(0, 1);
+}
+
 

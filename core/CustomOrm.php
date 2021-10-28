@@ -55,11 +55,21 @@ class CustomOrm {
             $query_max_shares->execute();
             return $query_max_shares->fetchColumn();
         }
+    }
 
+    public function insertOneValue($db_name, $column_name, $column_value) {
+        $query = self::getPdo()->prepare("INSERT INTO $db_name ($column_name) VALUES ($column_value)");
+        $query->execute();
     }
 
     public function deleteRecord($db_name, $column, $condition, $value) {
         $query = "DELETE FROM $db_name WHERE $column $condition $value";
+        $stmt = self::getPdo()->prepare($query);
+        $stmt->execute();
+    }
+
+    public function deleteAllDataFromTable($db_name) {
+        $query = "DELETE FROM $db_name";
         $stmt = self::getPdo()->prepare($query);
         $stmt->execute();
     }

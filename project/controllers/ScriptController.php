@@ -5,6 +5,7 @@ namespace Project\Controllers;
 use Core\AffiliateModel;
 use Core\Controller;
 use Core\ParticipantModel;
+use Core\NotificationModel;
 use Core\Page;
 use Project\Services\ScriptService;
 
@@ -15,6 +16,7 @@ class ScriptController extends Controller {
     public function start(): Page {
         $participant_db = new ParticipantModel();
         $affiliates_db = new AffiliateModel();
+        $notifications_db = new NotificationModel();
         $scriptService = new ScriptService();
 
         $this->title = 'script';
@@ -29,12 +31,14 @@ class ScriptController extends Controller {
 
             $scriptService->setParticipantsRoles($participant_db);
 
+            $scriptService->sendNotifications($participant_db, $notifications_db);
+
             echo 'Generation completed!' . '<br>';
         } else {
             echo "Database is not empty!" . '<br>';
             echo "Deleting participants..." . '<br>';
 
-            $scriptService->clearAllRecords($participant_db, $affiliates_db);
+            $scriptService->clearAllRecords($participant_db, $affiliates_db, $notifications_db);
 
             echo 'Deletion completed!';
         }
