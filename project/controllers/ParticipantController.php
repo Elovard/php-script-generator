@@ -4,11 +4,10 @@ namespace Project\Controllers;
 
 use Core\Controller;
 use Core\ParticipantModel;
-use Project\Models\DbService;
 
-define('PARTICIPANT_ID_ARRAY', 0);
-define('PARTICIPANT_FIRSTNAME_ARRAY', 1);
-define('PARTICIPANT_LASTNAME_ARRAY', 2);
+const PARTICIPANT_ID_ARRAY = 0;
+const PARTICIPANT_FIRSTNAME_ARRAY = 1;
+const PARTICIPANT_LASTNAME_ARRAY = 2;
 
 class ParticipantController extends Controller {
 

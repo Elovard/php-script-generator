@@ -2,12 +2,13 @@
 
     namespace Core;
 
-    define('AFFILIATES_DB', 'affiliates');
+    const AFFILIATES_DB = 'affiliates';
+    const ONE_EMBEDDED_AFFILIATE = 1;
 
     class AffiliateModel extends CustomOrm {
 
         public function wipeRecordsFromAffiliates() {
-            parent::deleteRecord(AFFILIATES_DB, 'id', '!=', 1);
+            parent::deleteRecord(AFFILIATES_DB, 'id', '!=', ONE_EMBEDDED_AFFILIATE);
         }
 
         public function refreshAutoIncrementInAffiliates() {
