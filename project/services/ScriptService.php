@@ -4,6 +4,7 @@ namespace Project\Services;
 
 use Core\AffiliateModel;
 use \Core\ParticipantModel;
+use \Core\NotificationModel;
 use Faker\Factory;
 
 class ScriptService {
@@ -72,10 +73,28 @@ class ScriptService {
         $participant_db->setParticipantPositionToVicePresident($max_shares);
     }
 
-    public function clearAllRecords(ParticipantModel $participant_db, AffiliateModel $affiliates_db) {
+    public function sendNotifications(ParticipantModel $participant_db, NotificationModel $notifications_db) {
+        $counter = self::ONE_EMBEDDED_PARTICIPANT;
+
+        while ($counter != self::ALL_PARTICIPANTS) {
+            $enableNotifications = isNotificationsEnabled();
+            $participant_db->setNotifications($counter, $enableNotifications);
+
+            if ($enableNotifications == 1) {
+                $notifications_db->setNotifications($counter);
+            }
+            $counter++;
+        }
+    }
+
+    public function clearAllRecords(ParticipantModel $participant_db,
+                                    AffiliateModel $affiliates_db,
+                                    NotificationModel $notifications_db) {
+        $notifications_db->wipeRecordsFromNotifications();
         $participant_db->wipeRecordsFromParticipants();
         $affiliates_db->wipeRecordsFromAffiliates();
 
+        $notifications_db->refreshAutoIncrementInNotifications();
         $affiliates_db->refreshAutoIncrementInAffiliates();
         $participant_db->refreshAutoIncrementInParticipants();
     }
