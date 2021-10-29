@@ -34,6 +34,8 @@ class ScriptController extends Controller {
             $scriptService->sendNotifications($participant_db, $notifications_db);
 
             echo 'Generation completed!' . '<br>';
+
+
         } else {
             echo "Database is not empty!" . '<br>';
             echo "Deleting participants..." . '<br>';

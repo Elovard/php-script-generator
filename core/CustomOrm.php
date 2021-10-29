@@ -62,6 +62,18 @@ class CustomOrm {
         $query->execute();
     }
 
+    public function selectOneValue($db_name, $select, $column, $value) {
+        $query = self::getPdo()->prepare("SELECT $select FROM $db_name WHERE $column=$value");
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function selectAllFrom($db_name, $column, $value) {
+        $query = self::getPdo()->prepare("SELECT * FROM $db_name WHERE $column=$value");
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     public function deleteRecord($db_name, $column, $condition, $value) {
         $query = "DELETE FROM $db_name WHERE $column $condition $value";
         $stmt = self::getPdo()->prepare($query);
