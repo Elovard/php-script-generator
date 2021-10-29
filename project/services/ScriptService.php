@@ -82,6 +82,7 @@ class ScriptService {
 
             if ($enableNotifications == 1) {
                 $notifications_db->setNotifications($counter);
+                $notifications_db->sendNotificationAsEmail($counter);
             }
             $counter++;
         }
